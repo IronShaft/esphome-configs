@@ -1,0 +1,7 @@
+substitutions:
+  name: cabinet_thermostat
+  friendly_name: "Cabinet Thermostat"
+  area: "Cabinet"
+
+packages:
+  device: !include devices/tuya_thermostat.yaml

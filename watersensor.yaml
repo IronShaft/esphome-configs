@@ -1,0 +1,11 @@
+substitutions:
+  name: watersensor
+  friendly_name: "Water Sensor"
+  area: "Kitchen"
+
+packages:
+  device: !include devices/thermo_sensor.yaml
+
+sensor:
+  - id: !extend temperature
+    address: 0x0d020f92457f8328

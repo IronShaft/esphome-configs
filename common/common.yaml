@@ -1,0 +1,12 @@
+packages:
+  esphome: !include esphome.yaml
+  api: !include api.yaml
+  ota: !include ota.yaml
+  time: !include time.yaml
+  wifi: !include wifi.yaml
+  sensor: !include sensors.yaml
+  text_sensor: !include text_sensors.yaml
+  binary_sensor: !include binary_sensors.yaml
+  button: !include buttons.yaml
+
+captive_portal:

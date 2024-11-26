@@ -1,0 +1,7 @@
+substitutions:
+  name: bedroom_1_heatpump
+  friendly_name: "Bedroom 1 Conditioner"
+  area: "Bedroom 1"
+
+packages:
+  device: !include devices/mitsubishi_heatpump.yaml

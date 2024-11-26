@@ -1,0 +1,17 @@
+packages:
+  common: !include ../common/common.yaml
+  device: !include d1_mini.yaml
+
+one_wire:
+  - platform: gpio
+    pin: GPIO16
+
+sensor:
+  - platform: dallas_temp
+    id: temperature
+    name: "Temperature"
+    unit_of_measurement: "°C"
+    icon: "mdi:home-thermometer-outline"
+    device_class: "temperature"
+    state_class: "measurement"
+    update_interval: 10s

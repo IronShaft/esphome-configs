@@ -1,0 +1,7 @@
+substitutions:
+  name: bedroom_3_thermostat
+  friendly_name: "Bedroom 3 Thermostat"
+  area: "Bedroom 3"
+
+packages:
+  device: !include devices/tuya_thermostat.yaml

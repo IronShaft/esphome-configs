@@ -1,0 +1,7 @@
+substitutions:
+  name: leisure_thermostat
+  friendly_name: "Leisure Thermostat"
+  area: "Leisure"
+
+packages:
+  device: !include devices/tuya_thermostat.yaml

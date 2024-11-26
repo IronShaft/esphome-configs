@@ -1,0 +1,15 @@
+substitutions:
+  name: gasboiler
+  friendly_name: "Gas Boiler"
+  area: "Kitchen"
+
+packages:
+  device: !include devices/gasboiler.yaml
+
+sensor:
+  - id: !extend hotwater_temperature
+    address: 0xb9030c9794345028
+  - id: !extend heating_temperature
+    address: 0x7e0207924593bd28
+  - id: !extend external_heating_temperature
+    entity_id: sensor.watersensor_temperature

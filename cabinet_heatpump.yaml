@@ -1,0 +1,7 @@
+substitutions:
+  name: cabinet_heatpump
+  friendly_name: "Cabinet Conditioner"
+  area: "Cabinet"
+
+packages:
+  device: !include devices/mitsubishi_heatpump.yaml

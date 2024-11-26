@@ -1,0 +1,7 @@
+substitutions:
+  name: lounge_heatpump
+  friendly_name: "Lounge Conditioner"
+  area: "Lounge"
+
+packages:
+  device: !include devices/mitsubishi_heatpump.yaml

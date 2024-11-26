@@ -1,0 +1,319 @@
+packages:
+  common: !include ../common/common.yaml
+  device: !include d1_mini.yaml
+
+modbus:
+  id: modbus_id
+  uart_id: uart_id
+
+modbus_controller:
+  - id: iem3155
+    address: 0x1
+    modbus_id: modbus_id
+    command_throttle: 300ms
+    setup_priority: -10
+
+sensor:
+  - platform: modbus_controller
+    device_class: current
+    state_class: measurement
+    icon: "mdi:current-ac"
+    modbus_controller_id: iem3155
+    name: "Current Phase 1"
+    id: current_phase_1
+    address: 0x0BB7
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "A"
+    accuracy_decimals: 2
+
+  - platform: modbus_controller
+    device_class: current
+    state_class: measurement
+    icon: "mdi:current-ac"
+    modbus_controller_id: iem3155
+    name: "Current Phase 2"
+    id: current_phase_2
+    address: 0x0BB9
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "A"
+    accuracy_decimals: 2
+
+  - platform: modbus_controller
+    device_class: current
+    state_class: measurement
+    icon: "mdi:current-ac"
+    modbus_controller_id: iem3155
+    name: "Current Phase 3"
+    id: current_phase_3
+    address: 0x0BBB
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "A"
+    accuracy_decimals: 2
+
+  - platform: modbus_controller
+    device_class: current
+    state_class: measurement
+    icon: "mdi:current-ac"
+    modbus_controller_id: iem3155
+    name: "Current Average"
+    id: current_average
+    address: 0x0BC1
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "A"
+    accuracy_decimals: 2
+
+  - platform: modbus_controller
+    device_class: voltage
+    state_class: measurement
+    icon: "mdi:flash-triangle-outline"
+    modbus_controller_id: iem3155
+    name: "Voltage Phase 1"
+    id: voltage_phase_1
+    address: 0x0BD3
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "V"
+    accuracy_decimals: 2
+
+  - platform: modbus_controller
+    device_class: voltage
+    state_class: measurement
+    icon: "mdi:flash-triangle-outline"
+    modbus_controller_id: iem3155
+    name: "Voltage Phase 2"
+    id: voltage_phase_2
+    address: 0x0BD5
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "V"
+    accuracy_decimals: 2
+
+  - platform: modbus_controller
+    device_class: voltage
+    state_class: measurement
+    icon: "mdi:flash-triangle-outline"
+    modbus_controller_id: iem3155
+    name: "Voltage Phase 3"
+    id: voltage_phase_3
+    address: 0x0BD7
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "V"
+    accuracy_decimals: 2
+
+  - platform: modbus_controller
+    device_class: voltage
+    state_class: measurement
+    icon: "mdi:flash-triangle-outline"
+    modbus_controller_id: iem3155
+    name: "Voltage Average"
+    id: voltage_average
+    address: 0x0BDB
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "V"
+    accuracy_decimals: 2
+
+  - platform: modbus_controller
+    device_class: power
+    state_class: measurement
+    icon: "mdi:home-lightning-bolt-outline"
+    modbus_controller_id: iem3155
+    name: "Power Phase 1"
+    id: power_phase_1
+    address: 0x0BED
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "kW"
+    accuracy_decimals: 3
+
+  - platform: modbus_controller
+    device_class: power
+    state_class: measurement
+    icon: "mdi:home-lightning-bolt-outline"
+    modbus_controller_id: iem3155
+    name: "Power Phase 2"
+    id: power_phase_2
+    address: 0x0BEF
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "kW"
+    accuracy_decimals: 3
+
+  - platform: modbus_controller
+    device_class: power
+    state_class: measurement
+    icon: "mdi:home-lightning-bolt-outline"
+    modbus_controller_id: iem3155
+    name: "Power Phase 3"
+    id: power_phase_3
+    address: 0x0BF1
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "kW"
+    accuracy_decimals: 3
+
+  - platform: modbus_controller
+    device_class: power
+    state_class: measurement
+    icon: "mdi:home-lightning-bolt-outline"
+    modbus_controller_id: iem3155
+    name: "Power Total"
+    id: power_total
+    address: 0x0BF3
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "kW"
+    accuracy_decimals: 3
+
+  - platform: modbus_controller
+    state_class: measurement
+    icon: "mdi:sine-wave"
+    modbus_controller_id: iem3155
+    name: "Power Frequency"
+    id: power_frequency
+    address: 0x0C25
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "Hz"
+    accuracy_decimals: 2
+
+  - platform: modbus_controller
+    device_class: energy
+    state_class: total_increasing
+    icon: "mdi:meter-electric-outline"
+    modbus_controller_id: iem3155
+    name: "Energy Phase 1"
+    id: energy_phase_1
+    address: 0xB037
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "kWh"
+    accuracy_decimals: 2
+
+  - platform: modbus_controller
+    device_class: energy
+    state_class: total_increasing
+    icon: "mdi:meter-electric-outline"
+    modbus_controller_id: iem3155
+    name: "Energy Phase 2"
+    id: energy_phase_2
+    address: 0xB039
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "kWh"
+    accuracy_decimals: 2
+
+  - platform: modbus_controller
+    device_class: energy
+    state_class: total_increasing
+    icon: "mdi:meter-electric-outline"
+    modbus_controller_id: iem3155
+    name: "Energy Phase 3"
+    id: energy_phase_3
+    address: 0xB03B
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "kWh"
+    accuracy_decimals: 2
+
+  - platform: modbus_controller
+    device_class: energy
+    state_class: total_increasing
+    icon: "mdi:meter-electric-outline"
+    modbus_controller_id: iem3155
+    name: "Energy Total"
+    id: energy_total
+    address: 0xB02B
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "kWh"
+    accuracy_decimals: 2
+    filters:
+      # sync with main meter
+      - offset: 41985.27
+
+  - platform: modbus_controller
+    device_class: energy
+    state_class: total_increasing
+    icon: "mdi:meter-electric-outline"
+    modbus_controller_id: iem3155
+    name: "Energy Partial"
+    id: energy_partial
+    address: 0xB033
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "kWh"
+    accuracy_decimals: 2
+
+  - platform: modbus_controller
+    device_class: energy
+    state_class: total_increasing
+    icon: "mdi:meter-electric-outline"
+    modbus_controller_id: iem3155
+    name: "Energy Tariff A"
+    id: energy_tariff_a
+    address: 0xB03F
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "kWh"
+    accuracy_decimals: 2
+    filters:
+      # sync with main meter
+      - offset: 28330.85
+
+  - platform: modbus_controller
+    device_class: energy
+    state_class: total_increasing
+    icon: "mdi:meter-electric-outline"
+    modbus_controller_id: iem3155
+    name: "Energy Tariff B"
+    id: energy_tariff_b
+    address: 0xB041
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "kWh"
+    accuracy_decimals: 2
+    filters:
+      # sync with main meter
+      - offset: 13654.42
+
+  - platform: modbus_controller
+    device_class: energy
+    state_class: total_increasing
+    icon: "mdi:meter-electric-outline"
+    modbus_controller_id: iem3155
+    name: "Energy Tariff C"
+    id: energy_tariff_c
+    address: 0xB043
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "kWh"
+    accuracy_decimals: 2
+
+  - platform: modbus_controller
+    device_class: energy
+    state_class: total_increasing
+    icon: "mdi:meter-electric-outline"
+    modbus_controller_id: iem3155
+    name: "Energy Tariff D"
+    id: energy_tariff_d
+    address: 0xB045
+    register_type: holding
+    value_type: FP32
+    unit_of_measurement: "kWh"
+    accuracy_decimals: 2
+
+  - platform: modbus_controller
+    state_class: measurement
+    icon: "mdi:counter"
+    modbus_controller_id: iem3155
+    name: "Power Active Tariff"
+    id: power_tariff
+    address: 0x105E
+    register_type: holding
+    value_type: U_WORD

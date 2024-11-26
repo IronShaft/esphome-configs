@@ -1,0 +1,7 @@
+substitutions:
+  name: hallway_thermostat
+  friendly_name: "Hallway Thermostat"
+  area: "Hallway"
+
+packages:
+  device: !include devices/tuya_thermostat.yaml

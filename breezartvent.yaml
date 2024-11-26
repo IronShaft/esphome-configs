@@ -1,0 +1,7 @@
+substitutions:
+  name: breezartvent
+  friendly_name: "Breezart Ventilation"
+  area: "Hallway"
+
+packages:
+  device: !include devices/breezart.yaml

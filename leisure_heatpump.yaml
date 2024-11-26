@@ -1,0 +1,7 @@
+substitutions:
+  name: leisure_heatpump
+  friendly_name: "Leisure Conditioner"
+  area: "Leisure"
+
+packages:
+  device: !include devices/mitsubishi_heatpump.yaml

@@ -1,0 +1,7 @@
+substitutions:
+  name: lounge_thermostat
+  friendly_name: "Lounge Thermostat"
+  area: "Lounge"
+
+packages:
+  device: !include devices/tuya_thermostat.yaml

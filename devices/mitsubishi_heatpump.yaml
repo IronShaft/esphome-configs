@@ -1,0 +1,18 @@
+packages:
+  common: !include ../common/common.yaml
+  device: !include d1_mini.yaml
+
+uart: !remove
+
+external_components:
+  - source: github://geoffdavis/esphome-mitsubishiheatpump
+
+climate:
+  - platform: mitsubishi_heatpump
+    name: "Thermostat"
+    id: heatpump
+    hardware_uart: UART0
+    visual:
+      min_temperature: 16
+      max_temperature: 32
+      temperature_step: 1.0

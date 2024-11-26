@@ -1,0 +1,7 @@
+substitutions:
+  name: powermeter
+  friendly_name: "Power Meter"
+  area: "Lounge"
+
+packages:
+  device: !include devices/iem3155.yaml

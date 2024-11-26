@@ -1,0 +1,78 @@
+packages:
+  common: !include ../common/common.yaml
+  device: !include esp01_1m.yaml
+
+esphome:
+  on_boot:
+    priority: 600
+    then:
+      - switch.turn_on: lock
+      - select.set:
+          id: work_mode
+          option: "Manual"
+
+tuya:
+  time_id: hass_time
+
+climate:
+  - platform: tuya
+    name: "Thermostat"
+    id: thermostat
+    switch_datapoint: 1
+    target_temperature_datapoint: 2
+    current_temperature_datapoint: 3
+    supports_heat: true
+    supports_cool: false
+    temperature_multiplier: 0.5
+    preset:
+      eco:
+        datapoint: 5
+        temperature: 20 °C
+    visual:
+      min_temperature: 17 °C
+      max_temperature: 32 °C
+      temperature_step:
+        target_temperature: 1 °C
+        current_temperature: 0.5 °C
+
+sensor:
+  - platform: tuya
+    name: "Temperature"
+    id: temperature
+    sensor_datapoint: 3
+    unit_of_measurement: "°C"
+    device_class: "temperature"
+    state_class: measurement
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.5
+
+switch:
+  - platform: tuya
+    name: "Power"
+    id: power
+    switch_datapoint: 1
+
+  - platform: tuya
+    name: "Eco Mode"
+    id: eco_mode
+    icon: "mdi:earth"
+    switch_datapoint: 5
+
+  - platform: tuya
+    name: "Lock"
+    id: lock
+    icon: "mdi:lock"
+    switch_datapoint: 6
+
+select:
+  - platform: tuya
+    name: "Work Mode"
+    id: work_mode
+    icon: "mdi:hand-back-right-outline"
+    enum_datapoint: 4
+    optimistic: true
+    internal: true
+    options:
+      0: "Calendar"
+      1: "Manual"

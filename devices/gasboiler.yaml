@@ -1,0 +1,147 @@
+packages:
+  common: !include ../common/common.yaml
+  device: !include esp8285.yaml
+
+binary_sensor:
+  - platform: gpio
+    id: button_1
+    name: "Button 1"
+    pin:
+      number: GPIO0
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    # on_press:
+    #   - switch.toggle: switch_1
+
+  - platform: gpio
+    id: button_2
+    name: "Button 2"
+    pin:
+      number: GPIO9
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    # on_press:
+    #   - switch.toggle: switch_2
+
+  - platform: gpio
+    id: button_3
+    name: "Button 3"
+    pin:
+      number: GPIO10
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    # on_press:
+    #   - switch.toggle: switch_3
+
+  - platform: gpio
+    id: button_4
+    name: "Button 4"
+    pin:
+      number: GPIO14
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    # on_press:
+    #   - switch.toggle: switch_4
+
+switch:
+  - platform: gpio
+    id: switch_1
+    name: "Switch 1"
+    icon: "mdi:power"
+    pin: GPIO12
+    restore_mode: RESTORE_DEFAULT_ON
+
+  - platform: gpio
+    id: switch_2
+    name: "Switch 2"
+    icon: "mdi:heating-coil"
+    pin: GPIO5
+    restore_mode: RESTORE_DEFAULT_ON
+
+  - platform: gpio
+    id: switch_3
+    name: "Switch 3"
+    pin: GPIO4
+    restore_mode: RESTORE_DEFAULT_OFF
+
+  - platform: gpio
+    id: switch_4
+    name: "Switch 4"
+    pin: GPIO15
+    restore_mode: RESTORE_DEFAULT_OFF
+
+status_led:
+  pin:
+    number: GPIO13
+    inverted: true
+
+one_wire:
+    - platform: gpio
+      pin: GPIO2
+
+sensor:
+  - platform: dallas_temp
+    id: hotwater_temperature
+    name: "Hot Water Temperature"
+    unit_of_measurement: "°C"
+    icon: "mdi:water-thermometer-outline"
+    device_class: "temperature"
+    state_class: "measurement"
+    update_interval: 10s
+
+  - platform: dallas_temp
+    id: heating_temperature
+    name: "Heating Temperature"
+    unit_of_measurement: "°C"
+    icon: "mdi:home-thermometer-outline"
+    device_class: "temperature"
+    state_class: "measurement"
+    update_interval: 10s
+
+  - platform: homeassistant
+    id: external_heating_temperature
+    name: "External Heating Temperature"
+    internal: true
+
+  - platform: template
+    id: thermostat_sensor
+    name: "Thermostat Sensor Temperature"
+    internal: true
+    update_interval: 10s
+    lambda: |-
+      if (isnan(id(external_heating_temperature).state)) {
+        return id(heating_temperature).state;
+      } else {
+        return id(external_heating_temperature).state;
+      }
+
+climate:
+  - platform: thermostat
+    name: "Thermostat"
+    sensor: thermostat_sensor
+    visual:
+      min_temperature: 20
+      max_temperature: 60
+      temperature_step: 1
+    min_heating_off_time: 180s
+    min_heating_run_time: 60s
+    min_idle_time: 180s
+    heat_deadband: 2
+    heat_overrun: 8
+    on_boot_restore_from: memory
+    heat_action:
+      - switch.turn_on: switch_2
+    idle_action:
+      - switch.turn_off: switch_2
+    default_preset: Optimal
+    preset:
+      - name: Optimal
+        default_target_temperature_low: 30 °C
